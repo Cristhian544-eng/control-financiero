@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Timbrados</title>
+</head>
+<body>
+    <h1>Listado de Timbrados</h1>
+    <a th:href="@{/timbrados/nuevo}">Agregar Timbrado</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nro Timbrado</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="timbrado : ${timbrados}">
+                <td th:text="${timbrado.id}">1</td>
+                <td th:text="${timbrado.nroTimbrado}">12345678</td>
+                <td th:text="${timbrado.fechaInicio}">2025-01-01</td>
+                <td th:text="${timbrado.fechaFin}">2025-12-31</td>
+                <td th:text="${timbrado.estado}">Activo</td>
+                <td>
+                    <a th:href="@{'/timbrados/editar/' + ${timbrado.id}}">Editar</a>
+                    <a th:href="@{'/timbrados/eliminar/' + ${timbrado.id}}" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

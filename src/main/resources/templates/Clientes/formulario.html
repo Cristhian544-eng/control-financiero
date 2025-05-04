@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title th:text="${cliente.id != null} ? 'Editar Cliente' : 'Nuevo Cliente'">Formulario</title>
+    <title>Formulario Cliente</title>
 </head>
 <body>
     <h1 th:text="${cliente.id != null} ? 'Editar Cliente' : 'Nuevo Cliente'"></h1>
-    <form th:action="@{/cliente/guardar}" th:object="${cliente}" method="post">
+    <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post">
         <input type="hidden" th:field="*{id}" />
 
-        <label>Nombre:</label>
-        <input type="text" th:field="*{nombre}" required /><br/>
+        <label>Razón Social:</label>
+        <input type="text" th:field="*{razonSocial}" /><br/>
 
-        <label>Documento:</label>
-        <input type="text" th:field="*{documento}" required /><br/>
+        <label>RUC:</label>
+        <input type="text" th:field="*{ruc}" /><br/>
 
-        <label>Email:</label>
-        <input type="email" th:field="*{email}" /><br/>
+        <label>Dirección:</label>
+        <input type="text" th:field="*{direccion}" /><br/>
 
         <label>Teléfono:</label>
         <input type="text" th:field="*{telefono}" /><br/>
 
+        <label>Correo:</label>
+        <input type="email" th:field="*{email}" /><br/>
+
+        <label>Barrio:</label>
+        <select th:field="*{barrio}">
+            <option th:each="b : ${barrios}" th:value="${b}" th:text="${b.descripcion}"></option>
+        </select><br/>
+
+        <label>Condición de Pago:</label>
+        <select th:field="*{condicionPago}">
+            <option th:each="c : ${condicionesPago}" th:value="${c}" th:text="${c.descripcion}"></option>
+        </select><br/>
+
         <button type="submit">Guardar</button>
-        <a th:href="@{/cliente}">Cancelar</a>
     </form>
+    <a th:href="@{/clientes}">Volver al listado</a>
 </body>
 </html>

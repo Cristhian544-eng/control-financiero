@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Bancos</title>
+</head>
+<body>
+    <h1>Listado de Bancos</h1>
+    <a th:href="@{/bancos/nuevo}">Agregar Banco</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="banco : ${bancos}">
+                <td th:text="${banco.id}">1</td>
+                <td th:text="${banco.descripcion}">Banco Central</td>
+                <td>
+                    <a th:href="@{'/bancos/editar/' + ${banco.id}}">Editar</a>
+                    <a th:href="@{'/bancos/eliminar/' + ${banco.id}}" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

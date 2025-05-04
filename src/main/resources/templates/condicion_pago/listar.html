@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Condiciones de Pago</title>
+</head>
+<body>
+    <h1>Listado de Condiciones de Pago</h1>
+    <a th:href="@{/condiciones-pago/nuevo}">Agregar Condición de Pago</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Días</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="condicion : ${condicionesPago}">
+                <td th:text="${condicion.id}">1</td>
+                <td th:text="${condicion.descripcion}">Contado</td>
+                <td th:text="${condicion.dias}">0</td>
+                <td>
+                    <a th:href="@{'/condiciones-pago/editar/' + ${condicion.id}}">Editar</a>
+                    <a th:href="@{'/condiciones-pago/eliminar/' + ${condicion.id}}" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

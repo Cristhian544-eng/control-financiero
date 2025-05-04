@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Nacionalidades</title>
+</head>
+<body>
+    <h1>Listado de Nacionalidades</h1>
+    <a th:href="@{/nacionalidades/nuevo}">Nueva Nacionalidad</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="nacionalidad : ${nacionalidades}">
+                <td th:text="${nacionalidad.idNacionalidad}">1</td>
+                <td th:text="${nacionalidad.descripcion}">Paraguaya</td>
+                <td>
+                    <a th:href="@{/nacionalidades/editar/{id}(id=${nacionalidad.idNacionalidad})}">Editar</a>
+                    |
+                    <a th:href="@{/nacionalidades/eliminar/{id}(id=${nacionalidad.idNacionalidad})}"
+                       onclick="return confirm('¿Estás seguro de eliminar?');">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

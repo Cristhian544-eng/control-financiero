@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Lista de Clientes</title>
+    <title>Listado de Clientes</title>
 </head>
 <body>
-    <h1>Clientes</h1>
-    <a th:href="@{/cliente/form}">Nuevo Cliente</a>
+    <h1>Listado de Clientes</h1>
+    <a th:href="@{/clientes/nuevo}">Agregar Cliente</a>
     <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Documento</th>
-                <th>Email</th>
+                <th>Razón Social</th>
+                <th>RUC</th>
+                <th>Dirección</th>
                 <th>Teléfono</th>
+                <th>Correo</th>
+                <th>Barrio</th>
+                <th>Condición de Pago</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="cliente : ${cliente}">
+            <tr th:each="cliente : ${clientes}">
                 <td th:text="${cliente.id}">1</td>
-                <td th:text="${cliente.nombre}">Juan</td>
-                <td th:text="${cliente.documento}">12345678</td>
-                <td th:text="${cliente.email}">juan@mail.com</td>
-                <td th:text="${cliente.telefono}">098123456</td>
+                <td th:text="${cliente.razonSocial}">Cliente XYZ</td>
+                <td th:text="${cliente.ruc}">1234567-8</td>
+                <td th:text="${cliente.direccion}">Av. Siempre Viva</td>
+                <td th:text="${cliente.telefono}">0991000000</td>
+                <td th:text="${cliente.email}">correo@cliente.com</td>
+                <td th:text="${cliente.barrio.descripcion}">Centro</td>
+                <td th:text="${cliente.condicionPago.descripcion}">Contado</td>
                 <td>
-                    <a th:href="@{'/cliente/editar/' + ${cliente.id}}">Editar</a>
-                    <form th:action="@{/cliente/eliminar}" method="post" style="display:inline;">
-                        <input type="hidden" name="id" th:value="${cliente.id}" />
-                        <button type="submit">Eliminar</button>
-                    </form>
+                    <a th:href="@{'/clientes/editar/' + ${cliente.id}}">Editar</a>
+                    <a th:href="@{'/clientes/eliminar/' + ${cliente.id}}" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
                 </td>
             </tr>
         </tbody>

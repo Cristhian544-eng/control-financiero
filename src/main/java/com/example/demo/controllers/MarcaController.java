@@ -1,61 +1,46 @@
 package com.example.demo.controllers;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.example.demo.models.Marca;
 import com.example.demo.services.MarcaService;
-
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(path = "/marca")
-@AllArgsConstructor
+@RequestMapping("/marcas")
 public class MarcaController {
 
-    private final MarcaService marcaService;
+    @Autowired
+    private MarcaService marcaService;
 
     @GetMapping
     public String listar(Model model) {
-        model.addAttribute("marca", marcaService.getAllMarcas());
-        return "marca/listar";
+        model.addAttribute("marcas", marcaService.listar());
+        return "marcas/listar";
     }
 
-    @GetMapping("/form")
-    public String mostrarFormulario(Model model) {
+    @GetMapping("/nuevo")
+    public String formulario(Model model) {
         model.addAttribute("marca", new Marca());
-        return "marca/formulario";
+        return "marcas/formulario";
     }
 
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Marca marca) {
-        marcaService.saveMarca(marca);
-        return "redirect:/marca";
+        marcaService.guardar(marca);
+        return "redirect:/marcas";
     }
 
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Long id, Model model) {
-        Optional<Marca> marca = marcaService.getMarcaById(id);
-
-        if (marca.isPresent()) {
-            model.addAttribute("marca", marca.get());
-            return "marca/formulario";
-        }
-
-        return "redirect:/marca";
+        model.addAttribute("marca", marcaService.obtenerPorId(id));
+        return "marcas/formulario";
     }
 
-    @PostMapping("/eliminar")
-    public String eliminar(@RequestParam Long id) {
-        marcaService.deleteMarca(id);
-        return "redirect:/marca";
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Long id) {
+        marcaService.eliminar(id);
+        return "redirect:/marcas";
     }
 }

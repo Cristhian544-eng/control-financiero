@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Departamentos</title>
+    <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Departamentos</h1>
+
+    <a href="/departamentos/form" class="btn btn-primary mb-3">Nuevo Departamento</a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="d : ${departamentos}">
+            <td th:text="${d.id}"></td>
+            <td th:text="${d.descripcion}"></td>
+            <td>
+                <a th:href="@{/departamentos/editar/{id}(id=${d.id})}" class="btn btn-warning btn-sm">Editar</a>
+                <form th:action="@{/departamentos/eliminar}" method="post" style="display:inline;">
+                    <input type="hidden" name="id" th:value="${d.id}"/>
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

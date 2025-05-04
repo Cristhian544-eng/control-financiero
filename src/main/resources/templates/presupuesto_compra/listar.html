@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Presupuestos de Compras</title>
+</head>
+<body>
+<h1>Listado de Presupuestos de Compras</h1>
+
+<a th:href="@{/presupuestos-compras/nuevo}">Nuevo Presupuesto</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>ID Pedido</th>
+        <th>ID Proveedor</th>
+        <th>ID Empleado</th>
+        <th>ID Sucursal</th>
+        <th>Observación</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>ID Condición</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${lista}">
+        <td th:text="${item.id_presupuesto_com}"></td>
+        <td th:text="${item.id_pedido_compra}"></td>
+        <td th:text="${item.id_proveedor}"></td>
+        <td th:text="${item.id_empleado}"></td>
+        <td th:text="${item.id_sucursal}"></td>
+        <td th:text="${item.observacion}"></td>
+        <td th:text="${item.fecha}"></td>
+        <td th:text="${item.estado}"></td>
+        <td th:text="${item.id_condicion}"></td>
+        <td>
+            <a th:href="@{'/presupuestos-compras/editar/' + ${item.id_presupuesto_com}}">Editar</a>
+            <a th:href="@{'/presupuestos-compras/eliminar/' + ${item.id_presupuesto_com}}"
+               onclick="return confirm('¿Estás seguro de eliminar?')">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

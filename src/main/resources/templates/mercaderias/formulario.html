@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Mercadería</title>
+</head>
+<body>
+    <h1 th:text="${mercaderia.id != null} ? 'Editar Mercadería' : 'Nueva Mercadería'"></h1>
+    <form th:action="@{/mercaderias/guardar}" th:object="${mercaderia}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label>Descripción:</label>
+        <input type="text" th:field="*{descripcion}" /><br/>
+
+        <label>Precio:</label>
+        <input type="number" step="0.01" th:field="*{precio}" /><br/>
+
+        <label>Marca:</label>
+        <select th:field="*{marca}">
+            <option th:each="m : ${marcas}" th:value="${m}" th:text="${m.descripcion}"></option>
+        </select><br/>
+
+        <label>Tipo de Impuesto:</label>
+        <select th:field="*{tipoImpuesto}">
+            <option th:each="t : ${tiposImpuesto}" th:value="${t}" th:text="${t.descripcion}"></option>
+        </select><br/>
+
+        <button type="submit">Guardar</button>
+    </form>
+    <a th:href="@{/mercaderias}">Volver al listado</a>
+</body>
+</html>

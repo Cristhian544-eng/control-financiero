@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Cajas</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Listado de Cajas</h2>
+    <a th:href="@{/cajas/nuevo}" class="btn btn-primary mb-3">Nueva Caja</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="caja : ${cajas}">
+                <td th:text="${caja.idCaja}"></td>
+                <td th:text="${caja.descripcion}"></td>
+                <td>
+                    <a th:href="@{/cajas/editar/{id}(id=${caja.idCaja})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a th:href="@{/cajas/eliminar/{id}(id=${caja.idCaja})}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('¿Estás seguro de eliminar esta caja?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

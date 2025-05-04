@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Tipos de Impuesto</title>
+</head>
+<body>
+    <h1>Listado de Tipos de Impuesto</h1>
+    <a th:href="@{/tipoimpuesto/nuevo}">Agregar Tipo de Impuesto</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Porcentaje</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tipo : ${tipos}">
+                <td th:text="${tipo.id}">1</td>
+                <td th:text="${tipo.descripcion}">IVA</td>
+                <td th:text="${tipo.porcentaje}">10</td>
+                <td>
+                    <a th:href="@{'/tipoimpuesto/editar/' + ${tipo.id}}">Editar</a>
+                    <a th:href="@{'/tipoimpuesto/eliminar/' + ${tipo.id}}" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

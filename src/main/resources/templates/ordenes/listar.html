@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ordenes de Compra</title>
+</head>
+<body>
+    <h1>Listado de Órdenes de Compra</h1>
+
+    <a th:href="@{/ordenes/nuevo}">Nueva Orden</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ordenCompra : ${lista}">
+                <td th:text="${ordenCompra.id_orden_compra}"></td>
+                <td th:text="${ordenCompra.fecha}"></td>
+                <td th:text="${ordenCompra.estado}"></td>
+                <td>
+                    <a th:href="@{'/ordenes/editar/' + ${ordenCompra.id_orden_compra}}">Editar</a>
+                    |
+                    <a th:href="@{'/ordenes/eliminar/' + ${ordenCompra.id_orden_compra}}"
+                       onclick="return confirm('¿Está seguro de eliminar esta orden?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

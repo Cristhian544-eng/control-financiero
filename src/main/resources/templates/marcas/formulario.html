@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title th:text="${marca.id != null} ? 'Editar Marca' : 'Nueva Marca'">Formulario</title>
+    <title>Formulario Marca</title>
 </head>
 <body>
     <h1 th:text="${marca.id != null} ? 'Editar Marca' : 'Nueva Marca'"></h1>
-    <form th:action="@{/marca/guardar}" th:object="${marca}" method="post">
+    <form th:action="@{/marcas/guardar}" th:object="${marca}" method="post">
         <input type="hidden" th:field="*{id}" />
 
         <label>Descripción:</label>
-        <input type="text" th:field="*{descripcion}" required /><br/>
+        <input type="text" th:field="*{descripcion}" /><br/>
 
         <button type="submit">Guardar</button>
-        <a th:href="@{/marca}">Cancelar</a>
     </form>
+    <a th:href="@{/marcas}">Volver al listado</a>
 </body>
 </html>

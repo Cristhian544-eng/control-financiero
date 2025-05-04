@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Orden de Compra</title>
+</head>
+<body>
+    <h1 th:text="${ordenCompra.id_orden_compra == null} ? 'Nueva Orden de Compra' : 'Editar Orden de Compra'"></h1>
+
+    <form th:action="@{/ordenes/guardar}" th:object="${ordenCompra}" method="post">
+        <input type="hidden" th:field="*{id_orden_compra}" />
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" th:field="*{fecha}" required /><br/><br/>
+
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" th:field="*{estado}" maxlength="20" required /><br/><br/>
+
+        <button type="submit">Guardar</button>
+        <a th:href="@{/ordenes}">Cancelar</a>
+    </form>
+</body>
+</html>

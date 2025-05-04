@@ -1,45 +1,36 @@
 package com.example.demo.services.impl;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-
 import com.example.demo.models.Cliente;
 import com.example.demo.repositories.ClienteRepository;
 import com.example.demo.services.ClienteService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class ClienteServiceImpl implements ClienteService {
 
-    private final ClienteRepository clienteRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @Override
-    public List<Cliente> getAllClientes() {
-        return this.clienteRepository.findAll();
+    public List<Cliente> listar() {
+        return clienteRepository.findAll();
     }
 
     @Override
-    public Optional<Cliente> getClienteById(Long id) {
-        return this.clienteRepository.findById(id);
+    public Cliente guardar(Cliente cliente) {
+        return clienteRepository.save(cliente);
     }
 
     @Override
-    public void saveCliente(Cliente cliente) {
-        if (Objects.nonNull(cliente)) {
-            this.clienteRepository.save(cliente);
-        }
+    public Cliente obtenerPorId(Long id) {
+        return clienteRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void deleteCliente(Long id) {
-        if (Objects.nonNull(id)) {
-            this.clienteRepository.findById(id)
-                .ifPresent(cliente -> this.clienteRepository.delete(cliente));
-        }
+    public void eliminar(Long id) {
+        clienteRepository.deleteById(id);
     }
 }

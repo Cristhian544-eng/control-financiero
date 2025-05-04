@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Mercaderías</title>
+</head>
+<body>
+    <h1>Listado de Mercaderías</h1>
+    <a th:href="@{/mercaderias/nuevo}">Agregar Mercadería</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Marca</th>
+                <th>Tipo Impuesto</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="mercaderia : ${mercaderias}">
+                <td th:text="${mercaderia.id}">1</td>
+                <td th:text="${mercaderia.descripcion}">Producto X</td>
+                <td th:text="${mercaderia.precio}">10000</td>
+                <td th:text="${mercaderia.marca.descripcion}">Marca A</td>
+                <td th:text="${mercaderia.tipoImpuesto.descripcion}">IVA 10%</td>
+                <td>
+                    <a th:href="@{'/mercaderias/editar/' + ${mercaderia.id}}">Editar</a>
+                    <a th:href="@{'/mercaderias/eliminar/' + ${mercaderia.id}}" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

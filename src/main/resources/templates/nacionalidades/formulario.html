@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Nacionalidad</title>
+</head>
+<body>
+    <h1>Formulario de Nacionalidad</h1>
+    <form th:action="@{/nacionalidades/guardar}" th:object="${nacionalidad}" method="post">
+        <input type="hidden" th:field="*{idNacionalidad}"/>
+        
+        <label>Descripción:</label>
+        <input type="text" th:field="*{descripcion}" required/>
+        <br/><br/>
+        
+        <button type="submit">Guardar</button>
+        <a th:href="@{/nacionalidades}">Cancelar</a>
+    </form>
+</body>
+</html>

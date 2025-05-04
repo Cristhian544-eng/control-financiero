@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Países</title></head>
+<body>
+<h1>Lista de Países</h1>
+<a th:href="@{/paises/nuevo}">Nuevo País</a>
+<table border="1">
+    <thead>
+    <tr><th>ID</th><th>Descripción</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+    <tr th:each="pais : ${paises}">
+        <td th:text="${pais.id}"></td>
+        <td th:text="${pais.descripcion}"></td>
+        <td><a th:href="@{/paises/editar/{id}(id=${pais.id})}">Editar</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

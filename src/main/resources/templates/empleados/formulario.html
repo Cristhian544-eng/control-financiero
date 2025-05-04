@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Empleado</title>
+</head>
+<body>
+    <h1 th:text="${empleado.id != null} ? 'Editar Empleado' : 'Nuevo Empleado'"></h1>
+    <form th:action="@{/empleados/guardar}" th:object="${empleado}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label>Legajo:</label>
+        <input type="text" th:field="*{legajo}" /><br/>
+
+        <label>Nombres:</label>
+        <input type="text" th:field="*{nombres}" /><br/>
+
+        <label>Apellidos:</label>
+        <input type="text" th:field="*{apellidos}" /><br/>
+
+        <label>Cédula de Identidad:</label>
+        <input type="text" th:field="*{cedulaIdentidad}" /><br/>
+
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" th:field="*{fechaNacimiento}" /><br/>
+
+        <label>Sexo:</label>
+        <input type="text" th:field="*{sexo}" /><br/>
+
+        <label>Estado:</label>
+        <input type="text" th:field="*{estado}" /><br/>
+
+        <label>Fecha de Incorporación:</label>
+        <input type="date" th:field="*{fechaIncorporacion}" /><br/>
+
+        <label>Dirección:</label>
+        <input type="text" th:field="*{direccion}" /><br/>
+
+        <label>Teléfono:</label>
+        <input type="text" th:field="*{telefono}" /><br/>
+
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" /><br/>
+
+        <label>Barrio:</label>
+        <select th:field="*{barrio}" required>
+            <option th:each="b : ${barrios}" th:value="${b}" th:text="${b.descripcion}"></option>
+        </select><br/>
+
+        <label>Nacionalidad:</label>
+        <select th:field="*{nacionalidad}" required>
+            <option th:each="n : ${nacionalidades}" th:value="${n}" th:text="${n.descripcion}"></option>
+        </select><br/>
+
+        <button type="submit">Guardar</button>
+    </form>
+    <a th:href="@{/empleados}">Volver al listado</a>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Condición de Pago</title>
+</head>
+<body>
+    <h1 th:text="${condicionPago.id != null} ? 'Editar Condición de Pago' : 'Nueva Condición de Pago'"></h1>
+    <form th:action="@{/condiciones-pago/guardar}" th:object="${condicionPago}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label>Descripción:</label>
+        <input type="text" th:field="*{descripcion}" /><br/>
+
+        <label>Días:</label>
+        <input type="number" th:field="*{dias}" /><br/>
+
+        <button type="submit">Guardar</button>
+    </form>
+    <a th:href="@{/condiciones-pago}">Volver al listado</a>
+</body>
+</html>

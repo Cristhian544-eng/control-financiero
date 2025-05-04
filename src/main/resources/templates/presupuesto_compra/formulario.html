@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Presupuesto de Compra</title>
+</head>
+<body>
+<h1>Formulario de Presupuesto de Compra</h1>
+
+<form th:action="@{/presupuestos-compras/guardar}" th:object="${presupuestoCompra}" method="post">
+    <input type="hidden" th:field="*{id_presupuesto_com}" />
+
+    <label>ID Pedido:</label>
+    <input type="number" th:field="*{id_pedido_compra}" /><br/>
+
+    <label>ID Proveedor:</label>
+    <input type="number" th:field="*{id_proveedor}" /><br/>
+
+    <label>ID Empleado:</label>
+    <input type="number" th:field="*{id_empleado}" /><br/>
+
+    <label>ID Sucursal:</label>
+    <input type="number" th:field="*{id_sucursal}" /><br/>
+
+    <label>Observación:</label>
+    <input type="text" th:field="*{observacion}" /><br/>
+
+    <label>Fecha:</label>
+    <input type="date" th:field="*{fecha}" /><br/>
+
+    <label>Estado:</label>
+    <input type="text" th:field="*{estado}" /><br/>
+
+    <label>ID Condición:</label>
+    <input type="number" th:field="*{id_condicion}" /><br/>
+
+    <button type="submit">Guardar</button>
+</form>
+
+<a th:href="@{/presupuestos-compras}">Volver al listado</a>
+
+</body>
+</html>

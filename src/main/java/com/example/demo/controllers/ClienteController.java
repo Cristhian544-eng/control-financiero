@@ -1,62 +1,46 @@
 package com.example.demo.controllers;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.example.demo.models.Cliente;
 import com.example.demo.services.ClienteService;
-
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(path = "/cliente")
-@AllArgsConstructor
+@RequestMapping("/clientes")
 public class ClienteController {
 
-    private final ClienteService clienteService;
+    @Autowired
+    private ClienteService clienteService;
 
     @GetMapping
     public String listar(Model model) {
-        model.addAttribute("cliente", clienteService.getAllClientes());
-        return "cliente/listar";
+        model.addAttribute("clientes", clienteService.listar());
+        return "clientes/listar";
     }
 
-    @GetMapping("/form")
-    public String mostrarFormulario(Model model) {
+    @GetMapping("/nuevo")
+    public String formulario(Model model) {
         model.addAttribute("cliente", new Cliente());
-        return "cliente/formulario";
+        return "clientes/formulario";
     }
 
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Cliente cliente) {
-        clienteService.saveCliente(cliente);
-        return "redirect:/cliente";
+        clienteService.guardar(cliente);
+        return "redirect:/clientes";
     }
 
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Long id, Model model) {
-
-        Optional<Cliente> cliente = clienteService.getClienteById(id);
-
-        if (cliente.isPresent()) {
-            model.addAttribute("cliente", cliente.get());
-            return "cliente/formulario";
-        }
-
-        return "redirect:/cliente";
+        model.addAttribute("cliente", clienteService.obtenerPorId(id));
+        return "clientes/formulario";
     }
 
-    @PostMapping("/eliminar")
-    public String eliminar(@RequestParam Long id) {
-        clienteService.deleteCliente(id);
-        return "redirect:/cliente";
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Long id) {
+        clienteService.eliminar(id);
+        return "redirect:/clientes";
     }
 }

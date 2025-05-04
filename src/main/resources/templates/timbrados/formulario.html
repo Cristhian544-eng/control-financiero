@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Timbrado</title>
+</head>
+<body>
+    <h1 th:text="${timbrado.id != null} ? 'Editar Timbrado' : 'Nuevo Timbrado'"></h1>
+    <form th:action="@{/timbrados/guardar}" th:object="${timbrado}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label>Nro Timbrado:</label>
+        <input type="text" th:field="*{nroTimbrado}" /><br/>
+
+        <label>Fecha Inicio:</label>
+        <input type="date" th:field="*{fechaInicio}" /><br/>
+
+        <label>Fecha Fin:</label>
+        <input type="date" th:field="*{fechaFin}" /><br/>
+
+        <label>Estado:</label>
+        <input type="text" th:field="*{estado}" /><br/>
+
+        <button type="submit">Guardar</button>
+    </form>
+    <a th:href="@{/timbrados}">Volver al listado</a>
+</body>
+</html>

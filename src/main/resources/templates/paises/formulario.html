@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Formulario País</title></head>
+<body>
+<h1>Formulario País</h1>
+<form th:action="@{/paises/guardar}" th:object="${pais}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <label>Descripción:</label>
+    <input type="text" th:field="*{descripcion}" /><br/>
+    <button type="submit">Guardar</button>
+</form>
+<a th:href="@{/paises}">Volver</a>
+</body>
+</html>

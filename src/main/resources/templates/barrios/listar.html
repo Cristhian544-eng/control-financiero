@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Barrios</title>
+</head>
+<body>
+    <h1>Listado de Barrios</h1>
+    <a th:href="@{/barrios/nuevo}">Agregar Barrio</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Ciudad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="barrio : ${barrios}">
+                <td th:text="${barrio.id}">1</td>
+                <td th:text="${barrio.descripcion}">Nombre</td>
+                <td th:text="${barrio.ciudad.descripcion}">Ciudad</td>
+                <td>
+                    <a th:href="@{'/barrios/editar/' + ${barrio.id}}">Editar</a>
+                    <a th:href="@{'/barrios/eliminar/' + ${barrio.id}}" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

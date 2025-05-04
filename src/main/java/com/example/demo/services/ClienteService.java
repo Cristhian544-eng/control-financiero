@@ -1,17 +1,11 @@
 package com.example.demo.services;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.example.demo.models.Cliente;
+import java.util.List;
 
 public interface ClienteService {
-
-    List<Cliente> getAllClientes();
-
-    Optional<Cliente> getClienteById(Long id);
-
-    void saveCliente(Cliente cliente);
-
-    void deleteCliente(Long id);
+    List<Cliente> listar();
+    Cliente guardar(Cliente cliente);
+    Cliente obtenerPorId(Long id);
+    void eliminar(Long id);
 }
